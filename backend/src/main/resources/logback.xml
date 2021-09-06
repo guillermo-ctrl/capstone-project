@@ -7,7 +7,7 @@
     </appender>
 
     <logger name="org.springframework.security" level="INFO"/>
-    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="org.springframework" level="INFO"/>
 
     <!-- Set level = DEBUG to get feign http output -->
     <logger name="en.capstone.backend" level="INFO"/>
