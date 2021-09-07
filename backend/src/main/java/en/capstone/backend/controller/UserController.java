@@ -36,7 +36,7 @@ public class UserController {
         String password = userDto.getPassword();
         if (userName != null && userName.length()> 0) {
             UserEntity userEntity = userService.create(userName, password);
-            UserDto createdUserDto = new UserDto(userEntity.getUsername(), userEntity.getPassword(), userEntity.getId());
+            UserDto createdUserDto = new UserDto(userEntity.getId(), userEntity.getUsername(), userEntity.getPassword());
             return new ResponseEntity<>(createdUserDto, HttpStatus.CREATED);
         }
         return ResponseEntity.badRequest().build();
@@ -53,8 +53,7 @@ public class UserController {
             return notFound().build();
         };
         UserEntity userEntity = optionalUserEntity.get();
-        UserDto createdUserDto = new UserDto(userEntity.getUsername(), userEntity.getPassword(), userEntity.getId());
+        UserDto createdUserDto = new UserDto(userEntity.getId(), userEntity.getUsername(), userEntity.getPassword());
         return ok(createdUserDto);
     }
-
 }
