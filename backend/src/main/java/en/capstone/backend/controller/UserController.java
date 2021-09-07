@@ -26,10 +26,12 @@ public class UserController {
     @ApiOperation(value = "Persist into Database")
     @PostMapping("/data")
     public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
-        String name = userDto.getName();
+        String name = userDto.getUserName();
+        String password = userDto.getPassword();
+        Long id = userDto.getId();
         if (name != null && name.length()> 0) {
-            UserEntity userEntity = userService.create(name);
-            UserDto createdUserDto = new UserDto(userEntity.getId(), userEntity.getUsername());
+            UserEntity userEntity = userService.create(name, id, password);
+            UserDto createdUserDto = new UserDto(userEntity.getId(), userEntity.getUsername(), userEntity.getPassword());
             return new ResponseEntity<>(createdUserDto, HttpStatus.CREATED);
         }
         return ResponseEntity.badRequest().build();

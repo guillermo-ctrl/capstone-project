@@ -1,22 +1,18 @@
 package en.capstone.backend.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class UserDto {
     private Long id;
-    private String name;
+    private String userName;
+    private String password;
 
-    public UserDto() {
-    }
-
-    public UserDto(Long id, String name) {
+    public UserDto(Long id, String userName, String password) {
         this.id = id;
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.password = password;
+        this.userName = userName;
     }
 }
