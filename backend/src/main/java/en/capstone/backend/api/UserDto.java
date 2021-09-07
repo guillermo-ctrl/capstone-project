@@ -10,9 +10,10 @@ public class UserDto {
     private String userName;
     private String password;
 
-    public UserDto(Long id, String userName, String password) {
-        this.id = id;
+
+    public UserDto(String userName, String password, Long id) {
         this.password = password;
         this.userName = userName;
+        this.id = id;
     }
 }

@@ -19,12 +19,13 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public UserEntity create(String name, Long id, String password) {
+    public UserEntity create(String name, String password) {
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(name.trim());
-        userEntity.setId(id);
+
         userEntity.setPassword(password);
         return userRepo.save(userEntity);
     }
+
 }
