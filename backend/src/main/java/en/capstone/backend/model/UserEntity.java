@@ -16,7 +16,7 @@ import java.util.Objects;
 @Getter
 @Setter
 
-public class UserEntity implements UserDetails {
+public class UserEntity {
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
@@ -41,34 +41,5 @@ public class UserEntity implements UserDetails {
         return Objects.hash(getId(), getPassword(), getUsername());
     }
 
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("user"));
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
 }
 
