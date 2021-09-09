@@ -2,6 +2,7 @@ package en.capstone.backend.config;
 
 import en.capstone.backend.service.UserEntityDetailsService;
 
+import io.swagger.models.HttpMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 
 @EnableWebSecurity
@@ -49,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(GET, "/").permitAll()
+                .antMatchers(POST, "/auth/login").permitAll()
                 .antMatchers(GET, SWAGGER_URLS).permitAll()
                 .antMatchers(GET,"/user/**").authenticated()
                 .and().formLogin()
