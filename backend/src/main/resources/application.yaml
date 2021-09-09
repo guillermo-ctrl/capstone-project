@@ -19,3 +19,4 @@ spring:
 server:
   servlet:
     context-path: "/api/${spring.application.name}"
+
