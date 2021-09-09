@@ -32,7 +32,7 @@ public class UserController {
     @ApiOperation(value = "Create a user")
     @PostMapping("/data")
     public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
-        String userName = userDto.getUserName();
+        String userName = userDto.getUsername();
         String password = userDto.getPassword();
         if (userName != null && userName.length()> 0) {
             UserEntity userEntity = userService.create(userName, password);
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @ApiOperation(value= "Get a user by ID")
-    @GetMapping("/data/{id}")
+    @GetMapping("/data/userid/{id}")
     @ApiResponses(value = {
             @ApiResponse(code = SC_NOT_FOUND, message = "ID not in database")
     })
@@ -56,4 +56,20 @@ public class UserController {
         UserDto createdUserDto = new UserDto(userEntity.getId(), userEntity.getUsername(), userEntity.getPassword());
         return ok(createdUserDto);
     }
+
+    @ApiOperation(value= "Get a user by username")
+    @GetMapping("/data/username/{username}")
+    @ApiResponses(value = {
+            @ApiResponse(code = SC_NOT_FOUND, message = "User not in database")
+    })
+    public ResponseEntity<UserDto> getByUsername(@PathVariable String username) throws NotFoundException {
+        Optional<UserEntity> optionalUserEntity = userService.findByUsername(username);
+        if (optionalUserEntity.isEmpty()) {
+            return notFound().build();
+        };
+        UserEntity userEntity = optionalUserEntity.get();
+        UserDto createdUserDto = new UserDto(userEntity.getId(), userEntity.getUsername(), userEntity.getPassword());
+        return ok(createdUserDto);
+    }
+
 }

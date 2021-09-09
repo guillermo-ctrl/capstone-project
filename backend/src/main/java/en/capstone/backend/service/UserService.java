@@ -33,4 +33,8 @@ public class UserService {
     public Optional<UserEntity> findById(Long id) {
         return userRepo.findById(id);
     }
+
+    public Optional<UserEntity> findByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
 }
