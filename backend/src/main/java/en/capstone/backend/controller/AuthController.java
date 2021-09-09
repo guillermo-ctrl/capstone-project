@@ -1,10 +1,12 @@
 package en.capstone.backend.controller;
 
+import en.capstone.backend.api.AccessToken;
 import en.capstone.backend.api.Credentials;
 import en.capstone.backend.api.User;
 import en.capstone.backend.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 
 @RestController
@@ -37,7 +41,7 @@ public class AuthController {
     }
 
     @PostMapping("login")
-    public String login(@RequestBody Credentials credentials) {
+    public ResponseEntity<AccessToken> login(@RequestBody Credentials credentials) {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                 credentials.getUsername(),
                 credentials.getPassword()
@@ -48,9 +52,9 @@ public class AuthController {
 
             String token = jwtService.createJwtToken(credentials.getUsername());
 
-            return token;
+            return  ok(new AccessToken(token));
         }catch(AuthenticationException ex){
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 }
