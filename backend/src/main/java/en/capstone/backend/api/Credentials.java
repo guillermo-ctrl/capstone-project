@@ -1,14 +1,16 @@
 package en.capstone.backend.api;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
-public class UserDto {
-    private Long id;
+@NoArgsConstructor
+@Builder
+public class Credentials {
+
     private String username;
     private String password;
 
