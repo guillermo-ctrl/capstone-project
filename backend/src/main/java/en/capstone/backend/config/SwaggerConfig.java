@@ -46,7 +46,7 @@ public class SwaggerConfig {
                 .securitySchemes(List.of(apiKey()))
                 .ignoredParameterTypes(getIgnoredParameterTypes())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("en.capstone-project.backend"))
+                .apis(RequestHandlerSelectors.basePackage("en.capstone.backend.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(getApiInfo());

@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static en.capstone.backend.controller.AuthController.ACCESS_TOKEN_URL;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 
@@ -54,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers(GET, "/").permitAll()
-                .antMatchers(POST, "/auth/login").permitAll()
+                .antMatchers(POST, "/auth" +ACCESS_TOKEN_URL).permitAll()
                 .antMatchers(GET, SWAGGER_URLS).permitAll()
                 .antMatchers(GET,"/user/**").authenticated()
                 .and()
