@@ -56,19 +56,17 @@ class AuthControllerTest {
         user.setPassword(passwordEncoder.encode("password"));
         userRepo.saveAndFlush(user);
 
-        // Given
+        // GIVEN
         Credentials credentials = Credentials.builder()
                 .username(user.getUsername())
                 .password("password").build();
 
-        // When
-
+        // WHEN
         ResponseEntity<AccessToken> response = restTemplate.postForEntity(
                         url(),
                         new HttpEntity<>(credentials),
                         AccessToken.class);
-        // Then
-
+        // THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
     }
 }
