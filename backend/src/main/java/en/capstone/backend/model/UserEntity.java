@@ -1,7 +1,7 @@
 package en.capstone.backend.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -9,7 +9,9 @@ import java.util.Objects;
 @Table(name = "user_repo")
 @Getter
 @Setter
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
     @Id
     @GeneratedValue

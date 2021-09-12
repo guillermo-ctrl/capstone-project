@@ -1,11 +1,14 @@
 spring:
   application:
     name: capstone-project
+  profiles:
+    active: local
   datasource:
-    url: jdbc:postgresql://localhost:5432/capstone
-    username: admin
-    password: 12345
+    url: jdbc:${profile.datasource.url}
+    username: ${profile.datasource.user}
+    password: ${profile.datasource.pass}
     driver-class-name: org.postgresql.Driver
+
   jpa:
     generate-ddl: true
     open-in-view: false
@@ -23,4 +26,4 @@ server:
 security:
   jwt:
     secret: "secret"
-    expiresAfterMinutes: 30
+    expires-after-minutes: 30
