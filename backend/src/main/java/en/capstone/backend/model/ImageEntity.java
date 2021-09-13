@@ -1,20 +1,26 @@
 package en.capstone.backend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+import javax.persistence.*;
+
+@Entity
+@Table(name = "image_repo")
+@Getter
+@Setter
 @Builder
-
+@NoArgsConstructor
+@AllArgsConstructor
 public class ImageEntity {
 
     @Id
-    private Long id;
+    @GeneratedValue
+    @Column(name = "imageId", nullable = false)
+    private String imageId;
+
+    @Column(name = "url", nullable = false, unique = true)
     private String url;
+
+    @Column(name = "password", nullable = false)
     private Long ownerId;
 }
