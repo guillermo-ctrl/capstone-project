@@ -14,10 +14,7 @@ import java.util.Objects;
 public class CloudinaryService {
     Cloudinary cloudinary = new Cloudinary(
             /*
-            ObjectUtils.asMap(
-            "cloud_name", "dtawebxku",
-            "api_key", "458812722881412",
-            "api_secret", "ObmHyB3w5h7fgLo-WyjWRKEBuqw")
+            cloudinary credentials here
             */);
 
     public ImageEntity uploadImage(File image) throws IOException {
