@@ -21,6 +21,6 @@ public class ImageEntity {
     @Column(name = "url", nullable = false, unique = true)
     private String url;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "ownerId", nullable = false)
     private Long ownerId;
 }
