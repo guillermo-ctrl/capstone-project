@@ -96,6 +96,13 @@
             <version>3.0.0</version>
         </dependency>
 
+        <!-- CLOUDINARY -->
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.29.0</version>
+        </dependency>
+
 
 
     </dependencies>
