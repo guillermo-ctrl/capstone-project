@@ -27,17 +27,22 @@ export default function Browse() {
             .then(setCurrentUser)
             .catch(error => {
             setError(error)
-            setLoading(false)
-    })}, [user])
+        }).finally(() => setLoading(false))
+        }, [user]
+    )
+
     console.log(currentUser)
+
     useEffect(() =>{
         setLoading(true)
         setError()
-        getAllUserDocs(currentUser.id).then(setAllDocuments).catch(error => {
+        getAllUserDocs(currentUser.id)
+            .then(setAllDocuments)
+            .catch(error => {
             setError(error)
-            setLoading(false)
-        })
-    }, [currentUser])
+        }).finally(() => setLoading(false))
+        }, [currentUser]
+    )
 
     if (!user) {
         return <Redirect to="/login" />
