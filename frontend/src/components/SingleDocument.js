@@ -1,9 +1,17 @@
 import styled from 'styled-components/macro'
+import {Redirect, useHistory} from "react-router-dom";
 
 export default function SingleDocument({...props}) {
+    const history = useHistory();
+
+    const handleClick = () => {
+        console.log(props.document)
+        history.push(`/details/${props.document.imageId}`)
+    }
+
     return (
         <Wrapper>
-            <img src={props.document.url} alt=""/>
+            <img src={props.document.url} alt="" onClick={handleClick}/>
         </Wrapper>
 
     )
