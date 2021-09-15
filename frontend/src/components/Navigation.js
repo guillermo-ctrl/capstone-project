@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
 
 export default function Navigation({ user, ...props }) {
@@ -12,7 +11,7 @@ export default function Navigation({ user, ...props }) {
 const Wrapper = styled.nav`
   border-bottom: 1px solid black;
   width: 100%;
-  display: flex;
+  display: flex;         
   overflow-y: scroll;
   background: #b4e2ff;
   justify-content: right;

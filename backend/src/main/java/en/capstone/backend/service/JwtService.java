@@ -23,8 +23,6 @@ public class JwtService {
         this.jwtConfig = jwtConfig;
     }
 
-    // Refactor: instead of username this method could take a userEntity
-    // https://github.com/guillermo-ctrl/capstone-project/pull/18
     public String createJwtToken(UserEntity user) {
         Instant now = Instant.now();
         Date iat = Date.from(now);
