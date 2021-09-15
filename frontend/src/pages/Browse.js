@@ -1,7 +1,7 @@
 import {useAuth} from "../auth/AuthProvider";
 import Page from "../components/Page";
 import Navigation from "../components/Navigation";
-import Button from "../components/Button";
+import LoginButton from "../components/LoginButton";
 import DocumentGallery from "../components/DocumentGallery";
 import {getAllUserDocs, getUserByUserName} from "../services/api-service";
 import {Redirect} from "react-router-dom";
@@ -31,7 +31,6 @@ export default function Browse() {
         }, [user]
     )
 
-    console.log(currentUser)
 
     useEffect(() =>{
         setLoading(true)
@@ -51,7 +50,7 @@ export default function Browse() {
     return (
         <Page>
             <Navigation user = {user}/>
-            <Button>Filter</Button>
+            <LoginButton>Filter</LoginButton>
             {loading && <Loading />}
             {error && <Error>{error.message}</Error>}
             <DocumentGallery allDocuments={allDocuments} />
