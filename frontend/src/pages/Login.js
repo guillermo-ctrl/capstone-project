@@ -1,5 +1,5 @@
 import TextField from "../components/TextField";
-import Button from "../components/Button";
+import Button from "../components/LoginButton";
 import Logo from "../components/Logo";
 import LoginPage from "../components/LoginPage";
 import logo from "../images/logo.png"
