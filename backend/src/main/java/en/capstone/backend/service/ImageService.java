@@ -23,4 +23,8 @@ public class ImageService {
     public ImageEntity getImageByImageId(String imageId) {
         return imageRepo.getImageEntityByImageId(imageId);
     }
+
+    public ImageEntity saveDocument(ImageEntity documentToSave) {
+        return imageRepo.save(documentToSave);
+    }
 }
