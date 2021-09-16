@@ -32,7 +32,7 @@ public class ImageEntity {
     private String recipient;
 
     @Column(name = "date")
-    private Date date;
+    private String date;
 
     @Column(name = "category")
     private String category;
