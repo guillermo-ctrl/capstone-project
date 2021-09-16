@@ -8,6 +8,8 @@ import {Redirect} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import LogoutButton from "../components/LogoutButton";
+import BackButton from "../components/BackButton";
 
 export default function Browse() {
     const { user } = useAuth()
@@ -50,7 +52,7 @@ export default function Browse() {
     return (
         <Page>
             <Navigation user = {user}/>
-            <LoginButton>Filter</LoginButton>
+            <h1>My documents</h1>
             {loading && <Loading />}
             {error && <Error>{error.message}</Error>}
             <DocumentGallery allDocuments={allDocuments} />
