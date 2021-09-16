@@ -26,4 +26,9 @@ public class ImageController {
         return imageService.getAllByUserId(ownerid);
     }
 
+    @GetMapping("getimagebyimageid/{imageId}")
+    public ImageEntity getImageByImageId(@PathVariable String imageId){
+        return imageService.getImageByImageId(imageId);
+    }
+
 }
