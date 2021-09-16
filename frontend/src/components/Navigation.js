@@ -1,13 +1,14 @@
 import styled from 'styled-components/macro'
-import LoginButton from "./LoginButton";
 import {useAuth} from "../auth/AuthProvider";
 import LogoutButton from "./LogoutButton";
+import {Redirect} from "react-router-dom";
 
 export default function Navigation({...props }) {
     const { user, logout } = useAuth()
+    if (!user) return <Redirect to = "/login"></Redirect>
     return (
         <Wrapper {...props}>
-            <p>Logged in as {user.username}</p>
+            {user && <p>Logged in as {user.username}</p>}
             <LogoutButton onClick={logout}>Log out</LogoutButton>
         </Wrapper>
     )

@@ -1,9 +1,16 @@
 import styled from 'styled-components/macro'
+import {useHistory} from "react-router-dom";
 
 export default function SingleDocument({...props}) {
+    const history = useHistory();
+
+    const handleClick = () => {
+        history.push(`/details/${props.document.imageId}`)
+    }
+
     return (
         <Wrapper>
-            <img src={props.document.url} alt=""/>
+            {props.document && <img src={props.document.url} alt="" onClick={handleClick}/>}
         </Wrapper>
 
     )

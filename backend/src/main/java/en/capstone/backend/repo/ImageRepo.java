@@ -10,4 +10,5 @@ public interface ImageRepo extends PagingAndSortingRepository<ImageEntity,String
 
     List<ImageEntity> getImageEntitiesByOwnerId(Long id);
 
+    ImageEntity getImageEntityByImageId(String imageId);
 }

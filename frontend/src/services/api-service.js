@@ -14,3 +14,6 @@ export const getAllUserDocs = (ownerid) =>
 export const getUserByUserName = (userName) =>
     axios.get(`/api/capstone-project/data/username/${userName}`)
         .then(response => response.data)
+
+export const getDocumentById = (imageId) =>
+    axios.get(`/api/capstone-project/image/getimagebyimageid/${imageId}`)

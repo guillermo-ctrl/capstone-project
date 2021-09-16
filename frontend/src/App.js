@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Login from "./pages/Login";
 import Browse from "./pages/Browse";
 import AuthProvider from "./auth/AuthProvider";
+import DocumentDetails from "./pages/DocumentDetail";
 
 
 
@@ -12,6 +13,7 @@ export default function App() {
                 <Switch>
                     <Route path="/login" component = {Login} />
                     <Route path="/browse" component={Browse} />
+                    <Route path="/details/:documentId" component={DocumentDetails} />
                 </Switch>
             </Router>
         </AuthProvider>

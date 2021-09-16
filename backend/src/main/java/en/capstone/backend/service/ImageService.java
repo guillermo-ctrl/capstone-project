@@ -19,4 +19,8 @@ public class ImageService {
     public List<ImageEntity> getAllByUserId(Long id) {
         return imageRepo.getImageEntitiesByOwnerId(id);
     }
+
+    public ImageEntity getImageByImageId(String imageId) {
+        return imageRepo.getImageEntityByImageId(imageId);
+    }
 }
