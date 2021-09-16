@@ -1,13 +1,14 @@
 package en.capstone.backend.controller;
 import en.capstone.backend.model.ImageEntity;
+import en.capstone.backend.service.CloudinaryService;
 import en.capstone.backend.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.io.File;
 
 
 @RestController
@@ -15,10 +16,12 @@ import java.util.List;
 public class ImageController {
 
     private final ImageService imageService;
+    private final CloudinaryService cloudinaryService;
 
     @Autowired
-    public ImageController(ImageService imageService) {
+    public ImageController(ImageService imageService, CloudinaryService cloudinaryService) {
         this.imageService = imageService;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @GetMapping("getallimages/{ownerid}")
@@ -30,5 +33,11 @@ public class ImageController {
     public ImageEntity getImageByImageId(@PathVariable String imageId){
         return imageService.getImageByImageId(imageId);
     }
-
+    @PostMapping("upload")
+    public ImageEntity uploadImage(@RequestParam MultipartFile document) throws IOException {
+        File fileToUpload = File.createTempFile("document", null);
+        document.transferTo(fileToUpload);
+        ImageEntity documentToSave = cloudinaryService.uploadImage(fileToUpload);
+        return imageService.saveDocument(documentToSave);
+    }
 }
