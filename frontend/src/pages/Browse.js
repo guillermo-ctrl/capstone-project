@@ -22,7 +22,7 @@ export default function Browse() {
         }
         setLoading(true)
         setError()
-        console.log(user.username)
+
         getUserByUserName(user.username)
             .then(setCurrentUser)
             .catch(error => {
