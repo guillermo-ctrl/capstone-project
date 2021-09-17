@@ -13,6 +13,7 @@ export default function App() {
                 <Switch>
                     <Route path="/login" component = {Login} />
                     <Route path="/browse" component={Browse} />
+                    <Route path="/browse" component={Upload} />
                     <Route path="/details/:documentId" component={DocumentDetails} />
                 </Switch>
             </Router>
