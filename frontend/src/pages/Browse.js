@@ -1,15 +1,12 @@
 import {useAuth} from "../auth/AuthProvider";
 import Page from "../components/Page";
 import Navigation from "../components/Navigation";
-import LoginButton from "../components/LoginButton";
 import DocumentGallery from "../components/DocumentGallery";
 import {getAllUserDocs, getUserByUserName} from "../services/api-service";
 import {Redirect} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
-import LogoutButton from "../components/LogoutButton";
-import BackButton from "../components/BackButton";
 
 export default function Browse() {
     const { user } = useAuth()
