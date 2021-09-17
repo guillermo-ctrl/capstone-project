@@ -32,3 +32,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Cloudinary credentials ###
+/backend/src/main/java/en/capstone/backend/api/CloudinaryCredentials.java

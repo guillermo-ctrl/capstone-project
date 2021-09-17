@@ -2,6 +2,7 @@ package en.capstone.backend.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import en.capstone.backend.api.CloudinaryCredentials;
 import en.capstone.backend.model.ImageEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,12 @@ import java.util.Objects;
 
 @Service
 public class CloudinaryService {
+
+    CloudinaryCredentials cloudinaryCredentials = new CloudinaryCredentials();
+
     Cloudinary cloudinary = new Cloudinary(
-            /*
-            cloudinary credentials here
-            */);
+            cloudinaryCredentials.getCredentials
+    );
 
     public ImageEntity uploadImage(File image) throws IOException {
         Map response = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());
