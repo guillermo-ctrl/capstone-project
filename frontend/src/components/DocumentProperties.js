@@ -7,11 +7,11 @@ export default function DocumentProperties({...props}) {
             <ul>
                 <li>Category: {props.document.category}</li>
                 <li>Date: {props.document.date}</li>
-                <li>Document type: {props.document.document_type}</li>
+                <li>Document type: {props.document.documentType}</li>
                 <li>Language: {props.document.language}</li>
                 <li>Recipient: {props.document.recipient}</li>
                 <li>Sender: {props.document.sender}</li>
-                <li>Physical location: {props.document.location}</li>
+                <li>Physical location: {props.document.physicalLocation}</li>
             </ul>
         </Wrapper>
     )
