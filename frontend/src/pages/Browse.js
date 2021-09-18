@@ -1,14 +1,12 @@
 import {useAuth} from "../auth/AuthProvider";
 import Page from "../components/Page";
 import Navigation from "../components/Navigation";
-import LoginButton from "../components/LoginButton";
 import DocumentGallery from "../components/DocumentGallery";
 import {getAllUserDocs, getUserByUserName} from "../services/api-service";
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import {useEffect, useState} from "react";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
-import LogoutButton from "../components/LogoutButton";
 import BackButton from "../components/BackButton";
 
 export default function Browse() {
@@ -17,6 +15,7 @@ export default function Browse() {
     const [error, setError] = useState()
     const [allDocuments, setAllDocuments] = useState([])
     const [currentUser, setCurrentUser] = useState(false)
+    const history = useHistory();
 
     useEffect(()=>{
         if(!user) {
@@ -49,6 +48,10 @@ export default function Browse() {
         return <Redirect to="/login" />
     }
 
+    const handleBack = event => {
+        history.push("/")
+    }
+
     return (
         <Page>
             <Navigation user = {user}/>
@@ -56,6 +59,7 @@ export default function Browse() {
             {loading && <Loading />}
             {error && <Error>{error.message}</Error>}
             <DocumentGallery allDocuments={allDocuments} />
+            <BackButton onClick ={handleBack} >Back</BackButton>
         </Page>
 
     )
