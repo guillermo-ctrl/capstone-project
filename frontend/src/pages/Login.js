@@ -35,7 +35,7 @@ export default function Login() {
     }
 
     if (user) {
-        return <Redirect to="/browse" />
+        return <Redirect to="/" />
     }
 
     return (
