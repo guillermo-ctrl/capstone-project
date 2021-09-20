@@ -17,3 +17,8 @@ export const getUserByUserName = (userName) =>
 
 export const getDocumentById = (imageId) =>
     axios.get(`/api/capstone-project/image/getimagebyimageid/${imageId}`)
+
+export const uploadDocument = (formData) =>
+    axios
+        .post('/api/capstone-project/image/upload', formData)
+        .then(response => response.data)

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Objects;
+
 
 @Service
 public class CloudinaryService {
@@ -19,6 +19,7 @@ public class CloudinaryService {
     Cloudinary cloudinary = new Cloudinary(
             cloudinaryCredentials.getCredentials
     );
+
 
     public ImageEntity uploadImage(File image) throws IOException {
         Map response = cloudinary.uploader().upload(image, ObjectUtils.emptyMap());

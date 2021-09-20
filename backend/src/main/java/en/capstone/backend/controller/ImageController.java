@@ -37,7 +37,7 @@ public class ImageController {
     public ImageEntity uploadImage(@RequestParam MultipartFile document) throws IOException {
         File fileToUpload = File.createTempFile("document", null);
         document.transferTo(fileToUpload);
-        ImageEntity documentToSave = cloudinaryService.uploadImage(fileToUpload);
-        return imageService.saveDocument(documentToSave);
+        System.out.println(fileToUpload);
+        return cloudinaryService.uploadImage(fileToUpload);
     }
 }
