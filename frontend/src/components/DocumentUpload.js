@@ -10,7 +10,9 @@ export function DocumentUpload() {
         event.preventDefault()
         setStatus('loading')
         const file = inputRef.current.files[0]
-        uploadDocument(file)
+        const formData = new FormData()
+        formData.set('document', file)
+        uploadDocument(formData)
             .then(() => setStatus('ready'))
             .catch(error => {
                 console.log("error")
