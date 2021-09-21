@@ -12,12 +12,12 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImageEntity {
+public class DocumentEntity {
 
     @Id
     @GeneratedValue
     @Column(name = "imageId", nullable = false)
-    private String imageId;
+    private Long imageId;
 
     @Column(name = "url", nullable = false, unique = true)
     private String url;
@@ -45,4 +45,9 @@ public class ImageEntity {
 
     @Column(name = "physicalLocation")
     private String physicalLocation;
+
+    public DocumentEntity(String url, Long ownerId) {
+        this.url = url;
+        this.ownerId = ownerId;
+    }
 }
