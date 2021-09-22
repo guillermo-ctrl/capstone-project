@@ -12,11 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import java.security.Principal;
 import java.util.Optional;
 
 import static org.springframework.http.ResponseEntity.ok;
@@ -39,9 +38,8 @@ public class AuthController {
     }
 
     @GetMapping("me")
-    public User getLoggedInUser(Principal principal) {
-        String username = principal.getName();
-        System.out.println(principal.toString());
+    public User getLoggedInUser(@AuthenticationPrincipal UserEntity user) {
+        String username = user.getUsername();
         return User.builder()
                 .username(username)
                 .build();
@@ -68,7 +66,6 @@ public class AuthController {
 
             return  ok(new AccessToken(token));
         }catch(RuntimeException ex){
-            ex.printStackTrace();
             log.info(ex.getMessage());
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

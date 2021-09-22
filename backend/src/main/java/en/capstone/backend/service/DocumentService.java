@@ -1,6 +1,7 @@
 package en.capstone.backend.service;
 
 import en.capstone.backend.model.DocumentEntity;
+import en.capstone.backend.model.UserEntity;
 import en.capstone.backend.repo.DocumentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +17,16 @@ public class DocumentService {
         this.documentRepo = documentRepo;
     }
 
-    public List<DocumentEntity> getAllByUserId(Long id) {
-        return documentRepo.getImageEntitiesByOwnerId(id);
+    public List<DocumentEntity> getAllByUserId(UserEntity user) {
+        return documentRepo.findAllByUserIs(user);
     }
 
-    public DocumentEntity getImageByImageId(String imageId) {
-        return documentRepo.getImageEntityByImageId(imageId);
+    public DocumentEntity getImageByImageId(String imageId, UserEntity user) {
+        return documentRepo.findByImageIdAndUserIs(Long.valueOf(imageId), user);
     }
 
-    public DocumentEntity saveFromUrl (String imageUrl, Long ownerId) {
-        DocumentEntity documentEntity = new DocumentEntity(imageUrl, ownerId);
+    public DocumentEntity saveFromUrl(String imageUrl, UserEntity user) {
+        DocumentEntity documentEntity = new DocumentEntity(imageUrl, user);
         return documentRepo.save(documentEntity);
     }
 }

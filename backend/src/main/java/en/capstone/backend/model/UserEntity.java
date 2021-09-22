@@ -29,13 +29,12 @@ public class UserEntity {
         if (this == o) return true;
         if (!(o instanceof UserEntity)) return false;
         UserEntity that = (UserEntity) o;
-        return getId().equals(that.getId()) && getPassword().equals(that.getPassword()) && getUsername().equals(that.getUsername());
+        return getId().equals(that.getId()) && getUsername().equals(that.getUsername());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getPassword(), getUsername());
+        return Objects.hash(getId(), getUsername());
     }
-
 }
 
