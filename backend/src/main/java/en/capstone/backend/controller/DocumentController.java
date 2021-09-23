@@ -32,8 +32,8 @@ public class DocumentController {
     }
 
     @GetMapping("getallimages")
-    public List<DocumentEntity> getImageEntitiesByOwnerId(@AuthenticationPrincipal UserEntity user) {
-        return documentService.getAllByUserId(user);
+    public List<DocumentEntity> getAllImageEntitiesFromUser(@AuthenticationPrincipal UserEntity user) {
+        return documentService.getAllByUser(user);
     }
 
     @GetMapping("getimagebyimageid/{imageId}")

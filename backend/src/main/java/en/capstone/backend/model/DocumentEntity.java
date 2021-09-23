@@ -22,6 +22,7 @@ public class DocumentEntity {
     private String url;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @Column(name = "sender")

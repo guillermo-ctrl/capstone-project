@@ -17,7 +17,7 @@ public class DocumentService {
         this.documentRepo = documentRepo;
     }
 
-    public List<DocumentEntity> getAllByUserId(UserEntity user) {
+    public List<DocumentEntity> getAllByUser(UserEntity user) {
         return documentRepo.findAllByUserIs(user);
     }
 
@@ -27,6 +27,7 @@ public class DocumentService {
 
     public DocumentEntity saveFromUrl(String imageUrl, UserEntity user) {
         DocumentEntity documentEntity = new DocumentEntity(imageUrl, user);
+        documentEntity.setUser(user);
         return documentRepo.save(documentEntity);
     }
 }
