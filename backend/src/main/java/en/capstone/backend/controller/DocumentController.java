@@ -5,6 +5,7 @@ import en.capstone.backend.model.DocumentEntity;
 import en.capstone.backend.model.UserEntity;
 import en.capstone.backend.service.CloudinaryService;
 import en.capstone.backend.service.DocumentService;
+import en.capstone.backend.service.MapperService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,21 +26,28 @@ public class DocumentController {
 
     private final DocumentService documentService;
     private final CloudinaryService cloudinaryService;
+    private final MapperService mapperService;
 
     @Autowired
-    public DocumentController(DocumentService documentService, CloudinaryService cloudinaryService) {
+    public DocumentController(DocumentService documentService, CloudinaryService cloudinaryService, MapperService mapperService) {
         this.documentService = documentService;
         this.cloudinaryService = cloudinaryService;
+        this.mapperService = mapperService;
     }
 
     @GetMapping("getallimages")
-    public List<DocumentEntity> getAllImageEntitiesFromUser(@AuthenticationPrincipal UserEntity user) {
-        return documentService.getAllByUser(user);
+    public List<Document> getAllImageEntitiesFromUser(@AuthenticationPrincipal UserEntity user) {
+        List<DocumentEntity> allDocEntities = documentService.getAllByUser(user);
+        List<Document> allDocs = new ArrayList<>();
+        for(DocumentEntity documentEntity : allDocEntities) {
+            allDocs.add(mapperService.map(documentEntity));
+        }
+        return allDocs;
     }
 
     @GetMapping("getimagebyimageid/{imageId}")
-    public DocumentEntity getImageByImageId(@PathVariable String imageId, @AuthenticationPrincipal UserEntity user) {
-        return documentService.getImageByImageId(imageId, user);
+    public Document getImageByImageId(@PathVariable String imageId, @AuthenticationPrincipal UserEntity user) {
+        return mapperService.map(documentService.getImageByImageId(imageId, user));
     }
 
     @ApiOperation(value = "Upload an image to cloudinary")
