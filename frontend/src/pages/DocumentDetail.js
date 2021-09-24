@@ -6,13 +6,12 @@ import SingleDocument from "../components/SingleDocument";
 import {getDocumentById} from "../services/api-service";
 import {useEffect, useState} from "react";
 import Loading from "../components/Loading";
-import Error from "../components/Error";
 import DocumentProperties from "../components/DocumentProperties";
 import BackButton from "../components/BackButton";
 
 
 export default function DocumentDetails () {
-    const { user } = useAuth()
+    const { token, user } = useAuth()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
     const [currentDocument, setCurrentDocument] = useState(false)
@@ -27,14 +26,14 @@ export default function DocumentDetails () {
         }
         setLoading(true)
         setError()
-        getDocumentById(documentId)
+        getDocumentById(token, documentId)
             .then(setCurrentDocument)
             .finally(() => setLoading(false))
-        }, [documentId])
+        }, [user])
+
     const handleBack = event => {
         history.push("/browse")
             }
-
 
     return (
         <Page>

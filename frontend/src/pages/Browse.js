@@ -10,38 +10,25 @@ import Error from "../components/Error";
 import BackButton from "../components/BackButton";
 
 export default function Browse() {
-    const { user } = useAuth()
+    const { token, user } = useAuth()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
     const [allDocuments, setAllDocuments] = useState([])
-    const [currentUser, setCurrentUser] = useState(false)
     const history = useHistory();
-
-    useEffect(()=>{
-        if(!user) {
-            return <Redirect to ="/login"/>
-        }
-        setLoading(true)
-        setError()
-
-        getUserByUserName(user.username)
-            .then(setCurrentUser)
-            .catch(error => {
-            setError(error)
-        }).finally(() => setLoading(false))
-        }, [user]
-    )
 
 
     useEffect(() =>{
         setLoading(true)
         setError()
-        getAllUserDocs(currentUser.id)
+        if (user) {
+
+        getAllUserDocs(token)
             .then(setAllDocuments)
             .catch(error => {
             setError(error)
         }).finally(() => setLoading(false))
-        }, [currentUser]
+        }
+        }, [user]
     )
 
     if (!user) {
