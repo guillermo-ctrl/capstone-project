@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_repo")
@@ -15,8 +16,11 @@ import java.util.Objects;
 public class UserEntity {
     @Id
     @GeneratedValue
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(name = "user_id", nullable = false)
+    private Long user_id;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<DocumentEntity> documentList;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -29,12 +33,12 @@ public class UserEntity {
         if (this == o) return true;
         if (!(o instanceof UserEntity)) return false;
         UserEntity that = (UserEntity) o;
-        return getId().equals(that.getId()) && getUsername().equals(that.getUsername());
+        return getUser_id().equals(that.getUser_id()) && getUsername().equals(that.getUsername());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUsername());
+        return Objects.hash(getUser_id(), getUsername());
     }
 }
 

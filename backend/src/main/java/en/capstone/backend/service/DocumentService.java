@@ -18,7 +18,8 @@ public class DocumentService {
     }
 
     public List<DocumentEntity> getAllByUser(UserEntity user) {
-        return documentRepo.findAllByUserIs(user);
+        List<DocumentEntity> allByUserIs = documentRepo.findAllByUserIs(user);
+        return allByUserIs;
     }
 
     public DocumentEntity getImageByImageId(String imageId, UserEntity user) {
