@@ -10,6 +10,7 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.ResponseEntity.notFound;
@@ -36,7 +37,7 @@ public class UserController {
         String password = user.getPassword();
         if (userName != null && userName.length()> 0) {
             UserEntity userEntity = userService.create(userName, password);
-            User createdUser = new User(userEntity.getId(), userEntity.getUsername(), userEntity.getPassword());
+            User createdUser = new User(userEntity.getUser_id(), userEntity.getUsername(), userEntity.getPassword());
             return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
         }
         return ResponseEntity.badRequest().build();
@@ -53,7 +54,7 @@ public class UserController {
             return notFound().build();
         };
         UserEntity userEntity = optionalUserEntity.get();
-        User createdUser = new User(userEntity.getId(), userEntity.getUsername(), userEntity.getPassword());
+        User createdUser = new User(userEntity.getUser_id(), userEntity.getUsername(), userEntity.getPassword());
         return ok(createdUser);
     }
 
@@ -62,13 +63,32 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(code = SC_NOT_FOUND, message = "User not in database")
     })
-    public ResponseEntity<User> getByUsername(@PathVariable String username) throws NotFoundException {
+    public ResponseEntity<User> getByUsername(@PathVariable String username, @AuthenticationPrincipal UserEntity user) throws NotFoundException {
         Optional<UserEntity> optionalUserEntity = userService.findByUsername(username);
         if (optionalUserEntity.isEmpty()) {
             return notFound().build();
         };
         UserEntity userEntity = optionalUserEntity.get();
-        User createdUser = new User(userEntity.getId(), userEntity.getUsername(), userEntity.getPassword());
+        User createdUser = new User(userEntity.getUser_id(), userEntity.getUsername(), userEntity.getPassword());
+        return ok(createdUser);
+    }
+
+    @ApiOperation(value= "Get the user_id by username")
+    @GetMapping("/data/getUserId/{username}")
+    @ApiResponses(value = {
+            @ApiResponse(code = SC_NOT_FOUND, message = "User not in database")
+    })
+    public ResponseEntity<User> getIdByUsername(@PathVariable String username, @AuthenticationPrincipal UserEntity user) throws NotFoundException {
+        Optional<UserEntity> optionalUserEntity = userService.findByUsername(username);
+        if (optionalUserEntity.isEmpty()) {
+            return notFound().build();
+        };
+        UserEntity userEntity = optionalUserEntity.get();
+        User createdUser = User.builder()
+                .user_id(userEntity.getUser_id())
+                .username(userEntity.getUsername())
+                .password(null)
+                .build();
         return ok(createdUser);
     }
 
