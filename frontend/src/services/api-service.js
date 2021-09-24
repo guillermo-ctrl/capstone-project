@@ -7,13 +7,33 @@ export const getToken = (credentials) =>
 
 //here we weill also put the functions to update the password, delete the user etc.
 
-export const getAllUserDocs = (ownerid) =>
-    axios.get(`api/capstone-project/image/getallimages/${ownerid}`)
+const headers = token => ({
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+})
+
+export const getAllUserDocs = (token) =>
+    axios.get(`/api/capstone-project/image/getallimages`, headers(token))
         .then(response => response.data)
 
-export const getUserByUserName = (userName) =>
-    axios.get(`/api/capstone-project/data/username/${userName}`)
+export const getUserByUserName = (token, userName) =>
+    axios.get(`/api/capstone-project/data/username/${userName}`, headers(token))
         .then(response => response.data)
 
-export const getDocumentById = (imageId) =>
-    axios.get(`/api/capstone-project/image/getimagebyimageid/${imageId}`)
+export const getDocumentById = (token, imageId) =>
+    axios.get(`/api/capstone-project/image/getimagebyimageid/${imageId}`, headers(token))
+
+export const uploadDocumentToCloudinary = (token, formData) =>
+    axios
+        .post('/api/capstone-project/image/upload_to_cloud', formData, headers(token))
+        .then(response => response.data)
+
+export const saveDocumentInDocumentRepo = (token, image) =>
+    axios
+        .post(`api/capstone-project/image/save_in_database`, image, headers(token))
+        .then(response => response.data)
+
+export const getIdByUsername = (token, userName) =>
+    axios.get(`/api/capstone-project/data/getUserId/${userName}`, headers(token))
+        .then(response => response.data)

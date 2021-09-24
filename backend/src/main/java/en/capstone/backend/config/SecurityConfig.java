@@ -2,7 +2,6 @@ package en.capstone.backend.config;
 
 import en.capstone.backend.filter.JwtAuthFilter;
 import en.capstone.backend.service.UserEntityDetailsService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -54,26 +53,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers(GET, "/").permitAll()
-                .antMatchers(POST, "/auth" +ACCESS_TOKEN_URL).permitAll()
+                .antMatchers(POST, "/auth" + ACCESS_TOKEN_URL).permitAll()
                 .antMatchers(GET, SWAGGER_URLS).permitAll()
-                .antMatchers(GET,"/user/**").authenticated()
+                .antMatchers("/**").authenticated()
                 .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                /*
-                Not sure if needed:
-                .and().formLogin()
-                .and().httpBasic();
-                 */
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web.ignoring().antMatchers(SWAGGER_URLS);
     }
-
-
-
 }
 

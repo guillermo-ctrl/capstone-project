@@ -3,7 +3,6 @@ package en.capstone.backend.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "image_repo")
@@ -12,18 +11,19 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImageEntity {
+public class DocumentEntity {
 
     @Id
     @GeneratedValue
     @Column(name = "imageId", nullable = false)
-    private String imageId;
+    private Long imageId;
 
     @Column(name = "url", nullable = false, unique = true)
     private String url;
 
-    @Column(name = "ownerId", nullable = false)
-    private Long ownerId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @Column(name = "sender")
     private String sender;
@@ -45,4 +45,9 @@ public class ImageEntity {
 
     @Column(name = "physicalLocation")
     private String physicalLocation;
+
+    public DocumentEntity(String url, UserEntity user) {
+        this.url = url;
+        this.user = user;
+    }
 }
