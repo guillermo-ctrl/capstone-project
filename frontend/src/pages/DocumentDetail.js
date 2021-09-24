@@ -35,6 +35,10 @@ export default function DocumentDetails () {
         history.push("/browse")
             }
 
+    const handleEdit = event => {
+        history.push(`/edit/${documentId}`)
+    }
+
     return (
         <Page>
             <Navigation user = {user}/>
@@ -43,6 +47,7 @@ export default function DocumentDetails () {
                     <div>
                         <DocumentProperties document = {currentDocument.data} />
                         <SingleDocument document={currentDocument.data}/>
+                        <BackButton onClick ={handleEdit} >Edit</BackButton>
                         <BackButton onClick ={handleBack} >Back to documents</BackButton>
                     </div>
             )}
