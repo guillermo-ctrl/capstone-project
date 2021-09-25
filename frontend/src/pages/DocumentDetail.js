@@ -16,7 +16,7 @@ export default function DocumentDetails () {
     const [error, setError] = useState()
     const [currentDocument, setCurrentDocument] = useState(false)
     const history = useHistory();
-    // The following way to get the documentId is terrible and shameful and needs to be changed
+    // The following way to get the documentId is terrible and shameful and needs to be changed (currently in documentDetails and DocumentEdit)
     const path = window.location.pathname
     const documentId = path.substring(9, path.length)
 
