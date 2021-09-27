@@ -1,5 +1,6 @@
 package en.capstone.backend.service;
 
+import en.capstone.backend.api.Document;
 import en.capstone.backend.model.DocumentEntity;
 import en.capstone.backend.model.UserEntity;
 import en.capstone.backend.repo.DocumentRepo;
@@ -31,4 +32,9 @@ public class DocumentService {
         documentEntity.setUser(user);
         return documentRepo.save(documentEntity);
     }
+
+    public DocumentEntity getFromUrl(String imageUrl, UserEntity user) {
+        return documentRepo.findByUrlAndUserIs(imageUrl, user);
+    }
+
 }
