@@ -2,11 +2,10 @@ import styled from "styled-components/macro";
 import BackButton from "./BackButton";
 import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
+import {updateDocument} from "../services/api-service";
 
 export function DocumentDetailsForm({...props}) {
     const { token, logout, user } = useAuth()
-
-
     const [category, setCategory] = useState(props.document.category)
     const [date, setDate] = useState(props.document.date)
     const [documentType, setDocumentType] = useState(props.document.documentType)
@@ -14,18 +13,20 @@ export function DocumentDetailsForm({...props}) {
     const [recipient, setRecipient] = useState(props.document.recipient)
     const [sender, setSender] = useState(props.document.sender)
     const [physicalLocation, setPhysicalLocation] = useState(props.document.physicalLocation)
-
     const [document, setDocument] = useState()
+    const [error, setError] = useState()
 
     useEffect(() => {
         if(document) {
-            console.log("new document was set, a put request is coming")
+            updateDocument(token, document)
+                .catch(error => {
+                    setError(error)
+                })
         }
     }, [document])
 
     const handleCategoryChange = event => {
         setCategory(event.target.value)
-        console.log(category)
     }
     const handleDateChange = event => {
         setDate(event.target.value)
@@ -49,16 +50,16 @@ export function DocumentDetailsForm({...props}) {
     const handleSubmit = event => {
         event.preventDefault()
 
-        const otherDocument = JSON.parse(JSON.stringify(props.document))
-        otherDocument.category = category
-        otherDocument.date = date
-        otherDocument.documentType = documentType
-        otherDocument.language = language
-        otherDocument.recipient = recipient
-        otherDocument.sender = sender
-        otherDocument.physicalLocation = physicalLocation
+        const modifiedDocument = JSON.parse(JSON.stringify(props.document))
+        modifiedDocument.category = category
+        modifiedDocument.date = date
+        modifiedDocument.documentType = documentType
+        modifiedDocument.language = language
+        modifiedDocument.recipient = recipient
+        modifiedDocument.sender = sender
+        modifiedDocument.physicalLocation = physicalLocation
 
-        setDocument(otherDocument)
+        setDocument(modifiedDocument)
     }
 
 
