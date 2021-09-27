@@ -18,6 +18,10 @@ public class DocumentService {
         this.documentRepo = documentRepo;
     }
 
+    public DocumentEntity save(DocumentEntity documentEntity, UserEntity user) {
+        return documentRepo.save(documentEntity);
+    }
+
     public List<DocumentEntity> getAllByUser(UserEntity user) {
         List<DocumentEntity> allByUserIs = documentRepo.findAllByUserIs(user);
         return allByUserIs;
@@ -37,4 +41,20 @@ public class DocumentService {
         return documentRepo.findByUrlAndUserIs(imageUrl, user);
     }
 
+    public DocumentEntity updateDocument(Document document, UserEntity user) {
+
+        DocumentEntity existingDocument = documentRepo.findByImageIdAndUserIs(Long.valueOf(document.getImageId()), user);
+        existingDocument.setDocumentType(document.getDocumentType());
+        existingDocument.setCategory(document.getCategory());
+        existingDocument.setDate(document.getDate());
+        existingDocument.setLanguage(document.getLanguage());
+        existingDocument.setSender(document.getSender());
+        existingDocument.setPhysicalLocation(document.getPhysicalLocation());
+        existingDocument.setRecipient(document.getRecipient());
+        existingDocument.setUser(user);
+        existingDocument.setUrl(document.getUrl());
+
+        return documentRepo.save(existingDocument);
+
+    }
 }

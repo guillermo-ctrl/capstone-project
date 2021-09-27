@@ -40,5 +40,5 @@ export const getIdByUsername = (token, userName) =>
 
 export const updateDocument = (token, document) =>
     axios
-        .put(`api/capstone-project/image/update`, document, headers(token))
+        .put(`/api/capstone-project/image/update`, document, headers(token))
         .then(response => response.data)
