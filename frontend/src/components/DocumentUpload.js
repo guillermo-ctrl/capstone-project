@@ -6,19 +6,31 @@ import {
     uploadDocumentToCloudinary
 } from "../services/api-service";
 import {useAuth} from "../auth/AuthProvider";
+import {useHistory} from "react-router-dom";
 
 export function DocumentUpload() {
+    const history = useHistory();
     const inputRef = useRef()
     const [status, setStatus] = useState('ready')
     const [error, setError] = useState('')
     const [uploadResponse, setUploadResponse] = useState()
     const [currentUser, setCurrentUser] = useState()
+    const [imageWithId, setImageWithId] = useState()
     const { token, user } = useAuth()
+
+
+    useEffect(() =>{
+        if (imageWithId) {
+            history.push(`/edit/${imageWithId.imageId}`)
+        }
+    }, [imageWithId])
 
     useEffect(()=>{
             if (currentUser) {
                 const newImage = uploadResponse
-                saveDocumentInDocumentRepo(token, newImage).catch(error => {
+                saveDocumentInDocumentRepo(token, newImage)
+                    .then(setImageWithId)
+                    .catch(error => {
                     setStatus('error')
                     setError(error)
                 })

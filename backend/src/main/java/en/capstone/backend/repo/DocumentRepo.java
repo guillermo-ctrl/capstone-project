@@ -11,4 +11,6 @@ public interface DocumentRepo extends JpaRepository<DocumentEntity,Long> {
     List<DocumentEntity> findAllByUserIs(UserEntity user);
 
     DocumentEntity findByImageIdAndUserIs(Long imageId, UserEntity user);
+
+    DocumentEntity findByUrlAndUserIs(String url, UserEntity user);
 }

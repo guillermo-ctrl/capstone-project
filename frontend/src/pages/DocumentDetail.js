@@ -1,7 +1,7 @@
 import Page from "../components/Page";
 import Navigation from "../components/Navigation";
 import {useAuth} from "../auth/AuthProvider";
-import {Redirect, useHistory} from "react-router-dom";
+import {Redirect, useHistory, useParams} from "react-router-dom";
 import SingleDocument from "../components/SingleDocument";
 import {getDocumentById} from "../services/api-service";
 import {useEffect, useState} from "react";
@@ -16,9 +16,9 @@ export default function DocumentDetails () {
     const [error, setError] = useState()
     const [currentDocument, setCurrentDocument] = useState(false)
     const history = useHistory();
-    // The following way to get the documentId is terrible and shameful and needs to be changed
-    const path = window.location.pathname
-    const documentId = path.substring(9, path.length)
+    const {documentId} = useParams();
+
+
 
     useEffect(()=>{
         if(!user) {
@@ -26,7 +26,7 @@ export default function DocumentDetails () {
         }
         setLoading(true)
         setError()
-        getDocumentById(token, documentId)
+        getDocumentById(token, documentId.toString())
             .then(setCurrentDocument)
             .finally(() => setLoading(false))
         }, [user])
@@ -34,6 +34,10 @@ export default function DocumentDetails () {
     const handleBack = event => {
         history.push("/browse")
             }
+
+    const handleEdit = event => {
+        history.push(`/edit/${documentId}`)
+    }
 
     return (
         <Page>
@@ -43,6 +47,7 @@ export default function DocumentDetails () {
                     <div>
                         <DocumentProperties document = {currentDocument.data} />
                         <SingleDocument document={currentDocument.data}/>
+                        <BackButton onClick ={handleEdit} >Edit</BackButton>
                         <BackButton onClick ={handleBack} >Back to documents</BackButton>
                     </div>
             )}

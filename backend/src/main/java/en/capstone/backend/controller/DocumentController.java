@@ -62,7 +62,8 @@ public class DocumentController {
     @PostMapping("save_in_database")
     public ResponseEntity<Document> saveDocumentInDocumentRepo(@RequestBody Document document, @AuthenticationPrincipal UserEntity user) {
         documentService.saveFromUrl(document.getUrl(), user);
-        return new ResponseEntity<>(document, HttpStatus.CREATED);
+        DocumentEntity createdDocumentEntity = documentService.getFromUrl(document.getUrl(), user);
+        return new ResponseEntity<>(mapperService.map(createdDocumentEntity), HttpStatus.CREATED);
 
     }
 }

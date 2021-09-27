@@ -37,3 +37,8 @@ export const saveDocumentInDocumentRepo = (token, image) =>
 export const getIdByUsername = (token, userName) =>
     axios.get(`/api/capstone-project/data/getUserId/${userName}`, headers(token))
         .then(response => response.data)
+
+export const updateDocument = (token, document) =>
+    axios
+        .put(`api/capstone-project/image/update`, document, headers(token))
+        .then(response => response.data)
