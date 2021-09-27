@@ -4,7 +4,7 @@ import Loading from "../components/Loading";
 import BackButton from "../components/BackButton";
 import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
-import {Redirect, useHistory} from "react-router-dom";
+import {Redirect, useHistory, useParams} from "react-router-dom";
 import {getDocumentById} from "../services/api-service";
 import {DocumentDetailsForm} from "../components/DocumentDetailsForm";
 import styled from "styled-components/macro";
@@ -14,9 +14,7 @@ export default function DocumentEdit () {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
     const history = useHistory();
-    // The following way to get the documentId is terrible and shameful and needs to be changed (currently in documentDetails and DocumentEdit)
-    const path = window.location.pathname
-    const documentId = path.substring(6, path.length)
+    const documentId = useParams();
     const [currentDocument, setCurrentDocument] = useState(false)
 
     useEffect(()=>{
@@ -25,19 +23,16 @@ export default function DocumentEdit () {
         }
         setLoading(true)
         setError()
-        getDocumentById(token, documentId)
+        getDocumentById(token, documentId.documentId)
             .then(setCurrentDocument)
             .finally(() => setLoading(false))
     }, [user])
 
     const handleBack = event => {
-        history.push(`/details/${currentDocument.data.imageId}`)
+        history.push(`/details/${documentId.documentId}`)
     }
     return (
         <Page>
-
-
-
             <Navigation user = {user}/>
             {loading && <Loading />}
             {currentDocument && (

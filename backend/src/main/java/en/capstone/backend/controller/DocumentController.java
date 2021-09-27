@@ -63,8 +63,7 @@ public class DocumentController {
     public ResponseEntity<Document> saveDocumentInDocumentRepo(@RequestBody Document document, @AuthenticationPrincipal UserEntity user) {
         documentService.saveFromUrl(document.getUrl(), user);
         DocumentEntity createdDocumentEntity = documentService.getFromUrl(document.getUrl(), user);
-        Document createdDocument = mapperService.map(createdDocumentEntity);
-        return new ResponseEntity<>(createdDocument, HttpStatus.CREATED);
+        return new ResponseEntity<>(mapperService.map(createdDocumentEntity), HttpStatus.CREATED);
 
     }
 }
