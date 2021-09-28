@@ -66,4 +66,12 @@ public class DocumentController {
         return new ResponseEntity<>(mapperService.map(createdDocumentEntity), HttpStatus.CREATED);
 
     }
+
+    @ApiOperation(value = "Update a document")
+    @PutMapping("update")
+    public ResponseEntity<Document> updateDocument(@RequestBody Document document, @AuthenticationPrincipal UserEntity user) {
+        documentService.updateDocument(document, user);
+        return new ResponseEntity<>(document, HttpStatus.OK);
+    }
+
 }

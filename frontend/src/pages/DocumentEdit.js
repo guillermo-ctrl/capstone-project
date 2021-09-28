@@ -31,6 +31,7 @@ export default function DocumentEdit () {
     const handleBack = event => {
         history.push(`/details/${documentId.documentId}`)
     }
+
     return (
         <Page>
             <Navigation user = {user}/>

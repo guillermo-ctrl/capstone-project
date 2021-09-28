@@ -3,6 +3,7 @@ import BackButton from "./BackButton";
 import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
 import {updateDocument} from "../services/api-service";
+import {useHistory, useParams} from "react-router-dom";
 
 export function DocumentDetailsForm({...props}) {
     const { token, logout, user } = useAuth()
@@ -15,15 +16,9 @@ export function DocumentDetailsForm({...props}) {
     const [physicalLocation, setPhysicalLocation] = useState(props.document.physicalLocation)
     const [document, setDocument] = useState()
     const [error, setError] = useState()
+    const [readyToRedirect, setReadyToRedirect] = useState(false)
+    const history = useHistory();
 
-    useEffect(() => {
-        if(document) {
-            updateDocument(token, document)
-                .catch(error => {
-                    setError(error)
-                })
-        }
-    }, [document])
 
     const handleCategoryChange = event => {
         setCategory(event.target.value)
@@ -46,6 +41,23 @@ export function DocumentDetailsForm({...props}) {
     const handlePhysicalLocationChange = event => {
         setPhysicalLocation(event.target.value)
     }
+
+    useEffect(() =>{
+        if(readyToRedirect) {
+            history.push(`/details/${document.imageId}`)
+        }
+    }, [readyToRedirect])
+
+    useEffect(() => {
+        if(document) {
+            updateDocument(token, document)
+                .then(setReadyToRedirect)
+                .catch(error => {
+                    setError(error)
+                })
+
+        }
+    }, [document])
 
     const handleSubmit = event => {
         event.preventDefault()
