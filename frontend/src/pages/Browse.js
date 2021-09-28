@@ -39,10 +39,15 @@ export default function Browse() {
         history.push("/")
     }
 
+    const handleFilter = event => {
+        history.push("/filter")
+    }
+
     return (
         <Page>
             <Navigation user = {user}/>
             <h1>My documents</h1>
+            <BackButton onClick ={handleFilter} >Filter</BackButton>
             {loading && <Loading />}
             {error && <Error>{error.message}</Error>}
             <DocumentGallery allDocuments={allDocuments} />
