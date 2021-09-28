@@ -8,6 +8,7 @@ import {Redirect} from "react-router-dom";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import {useAuth} from "../auth/AuthProvider";
+import LoginForm from "../components/LoginForm";
 
 const initialState = {
     username: '',
@@ -37,13 +38,14 @@ export default function Login() {
     if (user) {
         return <Redirect to="/" />
     }
+    document.body.style.height = `100vh`
 
     return (
         <LoginPage>
             <Logo src={logo}/>
             {loading && <Loading />}
             {!loading && (
-            <form onSubmit={handleSubmit}>
+            <LoginForm onSubmit={handleSubmit}>
                 <TextField
                     title = "Username"
                     name = "username"
@@ -57,7 +59,7 @@ export default function Login() {
                     onChange = {handleCredentialsChange}
                 />
                 <Button>Login</Button>
-            </form>
+            </LoginForm>
             )}
             {error && <Error>Invalid user name or password.</Error>}
         </LoginPage>

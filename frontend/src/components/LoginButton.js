@@ -1,13 +1,13 @@
 import styled from 'styled-components/macro'
 
 export default styled.button`
+  padding: 15px 0;
+  width: 100%;
   display: block;
   margin: auto;
-  padding: 10px;
-  border: 1px solid black;
-  color: black;
+  border: 0;
+  color: white;
   font-size: 1em;
-  border-radius: 15px;
-  background: #b4e2ff;
+  background: #15aabf;
   margin-top: 20%;
 `

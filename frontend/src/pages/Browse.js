@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 import BackButton from "../components/BackButton";
+import styled from 'styled-components/macro'
 
 export default function Browse() {
     const { token, user } = useAuth()
@@ -46,13 +47,32 @@ export default function Browse() {
     return (
         <Page>
             <Navigation user = {user}/>
-            <h1>My documents</h1>
-            <BackButton onClick ={handleFilter} >Filter</BackButton>
-            {loading && <Loading />}
-            {error && <Error>{error.message}</Error>}
-            <DocumentGallery allDocuments={allDocuments} />
-            <BackButton onClick ={handleBack} >Back</BackButton>
+            <Wrapper>
+                <h1>My documents</h1>
+                <BackButton onClick ={handleFilter} >Filter</BackButton>
+                {loading && <Loading />}
+                {error && <Error>{error.message}</Error>}
+                <DocumentGallery allDocuments={allDocuments} />
+                <BackButton onClick ={handleBack} >Back</BackButton>
+            </Wrapper>
         </Page>
 
     )
 }
+
+const Wrapper = styled.div `
+padding: 40px 10px;
+box-sizing: border-box;
+display: block;
+
+h1 {
+    margin: 0 0 30px;
+    text-align: center;
+   
+}
+
+button {
+    margin-bottom: 40px;
+}
+
+`

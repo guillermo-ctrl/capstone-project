@@ -12,18 +12,17 @@ export default function MainPageButton({...props}) {
 
 const BigButton = styled.button`
 
-width: 80%;
-padding-top: 5px;
-padding-bottom: 5px;
-border-radius: 10px;
-background: #b4e2ff;
-margin: 1em;
-font-size: 25px;
-display: block;
-vertical-align: middle;
-  
+    width: 95%;
+    padding: 30px 10px;
+    background: transparent;
+    margin: 1em auto;
+    font-size: 29px;
+    display: block;
+    vertical-align: middle;
+    border: 2px white solid;
   
   a {
     text-decoration: none;
+    color: white;
   }
 `

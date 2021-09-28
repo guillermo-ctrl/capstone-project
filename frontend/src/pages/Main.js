@@ -2,8 +2,8 @@ import Navigation from "../components/Navigation";
 import {Link, Redirect} from "react-router-dom";
 import {useAuth} from "../auth/AuthProvider";
 import MainPageButton from "../components/MainPageButton";
-import Page from "../components/Page";
 import styled from "styled-components/macro";
+import MainPage from "../components/MainPage";
 
 export default function Main () {
     const { user } = useAuth()
@@ -13,13 +13,13 @@ export default function Main () {
     }
 
     return (
-        <Page>
+        <MainPage>
             <Navigation user = {user}/>
             <MainPageContent>
                 <MainPageButton url = "/browse" linkText = "Browse documents"></MainPageButton>
                 <MainPageButton url = "/upload" linkText = "Upload a document"></MainPageButton>
             </MainPageContent>
-        </Page>
+        </MainPage>
 
     )
 }

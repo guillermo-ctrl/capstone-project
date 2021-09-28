@@ -74,49 +74,82 @@ export function DocumentDetailsForm({...props}) {
         setDocument(modifiedDocument)
     }
 
-
     return (
         <Wrapper>
 
                 <form onSubmit={handleSubmit}>
-
+                    <div>
                     <label>Category:</label>
                     <input type = "text" defaultValue = {props.document.category} onChange={handleCategoryChange}/>
+                    </div>
 
+                    <div>
                     <label>Date:</label>
                     <input type = "text" defaultValue = {props.document.date} onChange={handleDateChange}/>
+                    </div>
 
+                    <div>
                     <label>Document Type:</label>
                     <input type = "text" defaultValue = {props.document.documentType} onChange={handleDocumentTypeChange}/>
+                    </div>
 
+                    <div>
                     <label>Language:</label>
                     <input type = "text" defaultValue = {props.document.language} onChange={handleLanguageChange}/>
+                    </div>
 
+                    <div>
                     <label>Recipient:</label>
                     <input type = "text" defaultValue = {props.document.recipient} onChange={handleRecipientChange}/>
+                    </div>
 
+                    <div>
                     <label>Sender:</label>
                     <input type = "text" defaultValue = {props.document.sender} onChange={handleSenderChange}/>
+                    </div>
 
+                    <div>
                     <label>Physical location:</label>
                     <input type = "text" defaultValue = {props.document.physicalLocation} onChange={handlePhysicalLocationChange}/>
+                    </div>
 
+                    <div>
                     <input type = "submit" value = "Save changes"/>
+                    </div>
 
                 </form>
-
         </Wrapper>
     )
 }
 
 const Wrapper = styled.div `
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  margin-left: 10%;
-  input {
-    display: block;
-  }
+    input {
+       display: block;
+       padding: 5px;
+    }
+    input[type=submit] {
+       display: block;
+       width: 300px;
+       margin: 20px auto;
+       padding: 10px;
+       border: 0;
+       color: white;
+       font-size: 1em;
+       background: #15aabf;
+    }
+    
+    div {
+       padding: 10px;
+    }
+    
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: left;
+     margin-left: 10%;
+  
+  
+  
+  
   
 
 `

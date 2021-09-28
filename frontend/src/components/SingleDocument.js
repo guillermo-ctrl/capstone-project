@@ -17,14 +17,10 @@ export default function SingleDocument({...props}) {
 }
 
 const Wrapper = styled.div`
-  padding: 24px;
   width: 300px;
   text-align: center;
-  border: 1px solid #333;
-  border-radius: 12px;
-  box-shadow: 1px 2px 8px #666;
+  border: 1px solid #666;
   margin-bottom: 1em;
-
   
   img {
     width: 100%;
