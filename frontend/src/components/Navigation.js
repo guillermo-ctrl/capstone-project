@@ -19,11 +19,16 @@ const Wrapper = styled.nav`
   width: 100%;
   display: flex;         
   overflow-y: scroll;
-  background: #b4e2ff;
+  background: #15aabf;
   justify-content: right;
+  height: 60px;
+  align-items: center;
+
   
   p {
   font-size: 1em;
+  color: white;
+ 
   }
   
 `

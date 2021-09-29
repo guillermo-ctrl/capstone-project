@@ -2,12 +2,12 @@ import styled from 'styled-components/macro'
 
 export default styled.button`
   display: block;
-  margin: auto;
+  width: 300px;
+  margin: 20px auto;
   padding: 10px;
-  border: 1px solid black;
-  color: black;
+  border: 0;
+  color: white;
   font-size: 1em;
-  border-radius: 15px;
-  background: #b4e2ff;
-  margin-top: 20%;
+  background: #15aabf;
+ 
 `

@@ -5,19 +5,23 @@ export default function TextField({
     ...props
 }) {
     return(
-        <div>
+        <Wrapper>
             {title}
-            <Input{...props} title={title}/>
-        </div>
+            <input{...props} title={title}/>
+        </Wrapper>
 
     )
 }
 
-const Input = styled.input`
-  width: 100%;
-  font-size: 1em;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-top: 10px;
-  border-radius: var(--size-s);
+const Wrapper = styled.div`
+    input{
+        width: 100%;
+        font-size: 1em;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      margin-top: 10px;
+      border-radius: var(--size-s);
+    }
+  margin-bottom: 20px;
+ 
 `

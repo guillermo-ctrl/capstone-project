@@ -1,10 +1,12 @@
 import styled from 'styled-components/macro'
 
 export default styled.main`
-  display: grid;
-  place-items: center;
-  grid-gap: 3em;
-  padding-top: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ 
   
-  overflow-y: scroll;
+  
 `

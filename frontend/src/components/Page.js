@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 
 export default styled.div`
+
 position: absolute;
 top:0;
 left:0;
@@ -11,9 +12,5 @@ overflow-y: scroll;
 display: grid;
 place-items: center;
 grid-template-rows: min-content 1fr min-content;
-
-div {
-    padding: 1em;
-}
 
 `
