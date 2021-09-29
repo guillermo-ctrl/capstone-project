@@ -11,7 +11,7 @@ import {useHistory} from "react-router-dom";
 export default function Filter () {
 
     const {token, user} = useAuth()
-    const {error, setError} = useState()
+    const [error, setError] = useState()
     const [filteredDocuments, setFilteredDocuments] = useState([])
     const [filterParams, setFilterParams] = useState([])
     const [category, setCategory] = useState()
