@@ -1,4 +1,5 @@
 import axios from "axios";
+import {useParams} from "react-router-dom";
 
 export const getToken = (credentials) =>
     axios.post("api/capstone-project/auth/access-token", credentials)
@@ -16,6 +17,11 @@ const headers = token => ({
 export const getAllUserDocs = (token) =>
     axios.get(`/api/capstone-project/image/getallimages`, headers(token))
         .then(response => response.data)
+
+export const getSomeUserDocs = (token, paramArray) => {
+    axios.post(`/api/capstone-project/image/get-filtered-images`, paramArray, headers(token))
+        .then(response => response.data)
+}
 
 export const getUserByUserName = (token, userName) =>
     axios.get(`/api/capstone-project/data/username/${userName}`, headers(token))
