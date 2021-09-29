@@ -3,8 +3,10 @@ import Navigation from "../components/Navigation";
 import {useAuth} from "../auth/AuthProvider";
 import DocumentGallery from "../components/DocumentGallery";
 import {useEffect, useState} from "react";
-import styled from "styled-components/macro";
 import {getSomeUserDocs} from "../services/api-service";
+import FilterForm from "../components/FilterForm";
+import BackButton from "../components/BackButton";
+import {useHistory} from "react-router-dom";
 
 export default function Filter () {
 
@@ -53,6 +55,11 @@ export default function Filter () {
         }
     }, [filterParams])
 
+    const history = useHistory();
+    const handleBack = event => {
+        history.push("/browse")
+    }
+
     const handleSubmit = event => {
         event.preventDefault()
         const createdFilterParams = []
@@ -70,45 +77,52 @@ export default function Filter () {
     }
 
     return (
-        <Wrapper>
             <Page>
                 <Navigation user = {user}/>
-                <form onSubmit={handleSubmit}>
+                <FilterForm onSubmit={handleSubmit}>
+
+                    <div>
                     <label>Category:</label>
                     <input onChange={handleCategoryChange} type = "text"/>
+                    </div>
 
+                    <div>
                     <label>Date:</label>
                     <input onChange={handleDateChange} type = "text"/>
+                    </div>
 
+                    <div>
                     <label>Document Type:</label>
                     <input onChange={handleDocumentTypeChange} type = "text"/>
+                    </div>
 
+                    <div>
                     <label>Language:</label>
                     <input onChange={handleLanguageChange} type = "text"/>
+                    </div>
 
+                    <div>
                     <label>Recipient:</label>
                     <input onChange={handleRecipientChange} type = "text"/>
+                    </div>
 
+                    <div>
                     <label>Sender:</label>
                     <input onChange={handleSenderChange} type = "text"/>
+                    </div>
 
+                    <div>
                     <label>Physical location:</label>
                     <input onChange={handlePhysicalLocationChange} type = "text"/>
+                    </div>
 
+                    <div>
                     <input type = "submit" value = "Filter"/>
-
-                </form>
+                    </div>
+                <BackButton onClick = {handleBack}>Back</BackButton>
+                </FilterForm>
                 <DocumentGallery allDocuments = {filteredDocuments}/>
             </Page>
 
-        </Wrapper>
-
     )
 }
-
-const Wrapper = styled.div`
-    
-    input {
-        display: block;
-    }
-`

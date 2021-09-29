@@ -1,5 +1,4 @@
 import styled from "styled-components/macro";
-import BackButton from "./BackButton";
 import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
 import {updateDocument} from "../services/api-service";
@@ -126,6 +125,8 @@ const Wrapper = styled.div `
     input {
        display: block;
        padding: 5px;
+       float: right;
+       clear: both;
     }
     input[type=submit] {
        display: block;
