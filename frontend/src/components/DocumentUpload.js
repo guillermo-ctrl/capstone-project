@@ -74,26 +74,29 @@ export function DocumentUpload() {
             {isLoading ? (
                 <span>loading</span>
             ) : (
-                <>
+                <div>
                     <input type="file" ref={inputRef} />
                     <button>Upload</button>
-                </>
+                </div>
             )}
-
-            {uploadResponse &&
-            <span>
-                <p>Upload successful</p>
-                <img src = {uploadResponse.url} alt = ""/>
-            </span>
-            }
             {isError && <span>{error.message}</span>}
         </Wrapper>
     )
 }
 
 const Wrapper = styled.form`
-img {
-    width: 100%;
+display: grid;
+place-items: center;
+
+button {
+  display: block;
+  width: 300px;
+  margin: 20px auto;
+  padding: 10px;
+  border: 0;
+  color: white;
+  font-size: 1em;
+  background: #15aabf;
 }
 
 `
