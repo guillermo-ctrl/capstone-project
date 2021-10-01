@@ -18,10 +18,10 @@ export const getAllUserDocs = (token) =>
     axios.get(`/api/capstone-project/image/getallimages`, headers(token))
         .then(response => response.data)
 
-export const getSomeUserDocs = (token, paramArray) => {
-    axios.post(`/api/capstone-project/image/get-filtered-images`, paramArray, headers(token))
+export const getSomeUserDocs = (token, filterParams) =>
+    axios.post(`/api/capstone-project/image/get-filtered-images`, filterParams, headers(token))
         .then(response => response.data)
-}
+
 
 export const getUserByUserName = (token, userName) =>
     axios.get(`/api/capstone-project/data/username/${userName}`, headers(token))
