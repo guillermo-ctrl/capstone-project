@@ -8,6 +8,7 @@ import {Redirect, useHistory, useParams} from "react-router-dom";
 import {getDocumentById} from "../services/api-service";
 import {DocumentDetailsForm} from "../components/DocumentDetailsForm";
 import styled from "styled-components/macro";
+import DeleteButton from "../components/DeleteButton";
 
 export default function DocumentEdit () {
     const { token, user } = useAuth()

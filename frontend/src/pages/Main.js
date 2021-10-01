@@ -16,8 +16,8 @@ export default function Main () {
         <MainPage>
             <Navigation user = {user}/>
             <MainPageContent>
-                <MainPageButton url = "/browse" linkText = "Browse documents"></MainPageButton>
-                <MainPageButton url = "/upload" linkText = "Upload a document"></MainPageButton>
+                <MainPageButton url = "/browse" linkText = "Browse documents"/>
+                <MainPageButton url = "/upload" linkText = "Upload a document"/>
             </MainPageContent>
         </MainPage>
 

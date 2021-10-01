@@ -8,5 +8,5 @@ export default styled.button`
   border: 0;
   color: white;
   font-size: 1em;
-  background: #15aabf;
+  background: #E66222;
 `

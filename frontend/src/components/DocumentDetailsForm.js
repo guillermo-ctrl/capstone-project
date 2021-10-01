@@ -1,8 +1,10 @@
 import styled from "styled-components/macro";
 import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
-import {updateDocument} from "../services/api-service";
+import {deleteDocumentById, updateDocument} from "../services/api-service";
 import {useHistory, useParams} from "react-router-dom";
+import BackButton from "./BackButton";
+import DeleteButton from "./DeleteButton";
 
 export function DocumentDetailsForm({...props}) {
     const { token, logout, user } = useAuth()
@@ -73,6 +75,21 @@ export function DocumentDetailsForm({...props}) {
         setDocument(modifiedDocument)
     }
 
+    const handleBack = () => {
+        if (document) {
+            history.push(`/details/${document.documentId}`)
+        }
+    }
+
+    const handleDelete = () => {
+        if(document) {
+            deleteDocumentById(token, document.documentId).catch(error => {
+                setError(error)
+            })
+            history.push(`/browse`)
+        }
+    }
+
     return (
         <Wrapper>
 
@@ -115,19 +132,22 @@ export function DocumentDetailsForm({...props}) {
                     <div>
                     <input type = "submit" value = "Save changes"/>
                     </div>
-
+                    <BackButton onClick ={handleBack}>Cancel</BackButton>
+                    <DeleteButton onClick ={handleDelete}>Delete</DeleteButton>
                 </form>
         </Wrapper>
     )
 }
 
 const Wrapper = styled.div `
+
     input {
        display: block;
        padding: 5px;
        float: right;
-       clear: both;
+    
     }
+    
     input[type=submit] {
        display: block;
        width: 300px;
@@ -145,12 +165,5 @@ const Wrapper = styled.div `
     
      display: flex;
      flex-wrap: wrap;
-     justify-content: left;
-     margin-left: 10%;
-  
-  
-  
-  
-  
-
+     justify-content: center;
 `
