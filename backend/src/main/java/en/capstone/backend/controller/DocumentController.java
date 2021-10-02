@@ -1,6 +1,7 @@
 package en.capstone.backend.controller;
 
 import en.capstone.backend.api.Document;
+import en.capstone.backend.api.FilterParams;
 import en.capstone.backend.model.DocumentEntity;
 import en.capstone.backend.model.UserEntity;
 import en.capstone.backend.service.CloudinaryService;
@@ -57,6 +58,18 @@ public class DocumentController {
         document.transferTo(fileToUpload);
         return cloudinaryService.uploadDocument(fileToUpload);
     }
+
+    @ApiOperation(value = "Get a list of images that conform to a filter")
+    @PostMapping("get-filtered-images")
+    public List<Document> getFilteredDocs(@RequestBody FilterParams filterParams, @AuthenticationPrincipal UserEntity user) {
+        List<DocumentEntity> entityList = documentService.getFilteredDocs(filterParams, user);
+        List<Document> documentList = new ArrayList<>();
+        if(!entityList.isEmpty()) {for(DocumentEntity documentEntity : entityList) {
+            documentList.add(mapperService.map(documentEntity));
+        }}
+        return documentList;
+    }
+
 
     @ApiOperation(value = "Create a document in database")
     @PostMapping("save_in_database")
