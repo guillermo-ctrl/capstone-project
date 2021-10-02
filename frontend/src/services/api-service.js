@@ -49,6 +49,6 @@ export const updateDocument = (token, document) =>
         .put(`/api/capstone-project/image/update`, document, headers(token))
         .then(response => response.data)
 
-export const deleteDocumentById = (token, imageId) =>
-    axios.delete(`/api/capstone-project/image/getimagebyimageid/${imageId}`, headers(token))
+export const deleteDocumentById = (token, documentId) =>
+    axios.delete(`/api/capstone-project/image/delete/${documentId}`, headers(token))
         .then(response => response.data)

@@ -30,6 +30,10 @@ public class DocumentService {
         return allByUserIs;
     }
 
+    public void deleteByImageIdAndUserIs(String documentId, UserEntity user) {
+        documentRepo.deleteByImageIdAndUserIs(Long.valueOf(documentId), user);
+    }
+
     public DocumentEntity getImageByImageId(String imageId, UserEntity user) {
         return documentRepo.findByImageIdAndUserIs(Long.valueOf(imageId), user);
     }
@@ -60,6 +64,7 @@ public class DocumentService {
         return documentRepo.save(existingDocument);
 
     }
+
 
     public List<DocumentEntity> getFilteredDocs(FilterParams filterParams, UserEntity user) {
         String category = filterParams.getCategory();
@@ -155,4 +160,7 @@ public class DocumentService {
         filteredDocsList.removeAll(toDelete);
         return filteredDocsList;
     }
+
+
+
 }

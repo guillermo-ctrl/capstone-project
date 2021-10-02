@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 
 @RestController
@@ -85,6 +88,14 @@ public class DocumentController {
     public ResponseEntity<Document> updateDocument(@RequestBody Document document, @AuthenticationPrincipal UserEntity user) {
         documentService.updateDocument(document, user);
         return new ResponseEntity<>(document, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Delete a document by id")
+    @DeleteMapping(value = "delete/{documentId}")
+    public ResponseEntity<Document> deleteDocumentById(@PathVariable String documentId, @AuthenticationPrincipal UserEntity user) {
+        Document deletedDocument = mapperService.map(documentService.getImageByImageId(documentId, user));
+        documentService.deleteByImageIdAndUserIs(documentId, user);
+        return new ResponseEntity<>(deletedDocument, HttpStatus.OK);
     }
 
 }
