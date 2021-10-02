@@ -1,12 +1,15 @@
 package en.capstone.backend.service;
 
 import en.capstone.backend.api.Document;
+import en.capstone.backend.api.FilterParams;
 import en.capstone.backend.model.DocumentEntity;
 import en.capstone.backend.model.UserEntity;
 import en.capstone.backend.repo.DocumentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -56,5 +59,100 @@ public class DocumentService {
 
         return documentRepo.save(existingDocument);
 
+    }
+
+    public List<DocumentEntity> getFilteredDocs(FilterParams filterParams, UserEntity user) {
+        String category = filterParams.getCategory();
+        String date = filterParams.getDate();
+        String documentType = filterParams.getDocumentType();
+        String language = filterParams.getLanguage();
+        String recipient = filterParams.getRecipient();
+        String sender = filterParams.getSender();
+        String physicalLocation = filterParams.getPhysicalLocation();
+
+        List<DocumentEntity> filteredDocsList = documentRepo.findAllByUserIs(user);
+        List<DocumentEntity> toDelete = new ArrayList<DocumentEntity>();
+
+        for (DocumentEntity existingDoc : filteredDocsList) {
+
+            //category
+            if (!category.equals("")) { //is category an empty string?
+                if(existingDoc.getCategory() == null) { //is existingDoc category null?
+                    toDelete.add(existingDoc); //then delete because category has params and the document has it null
+                }
+                else if (!existingDoc.getCategory().equals(category)) {
+                    toDelete.add(existingDoc);
+                }
+            }
+
+
+            //date
+            if (!date.equals("")) {
+                if(existingDoc.getDate() == null) {
+                    toDelete.add(existingDoc);
+                }
+                else if (!existingDoc.getDate().equals(date)) {
+                    toDelete.add(existingDoc);
+                }
+            }
+
+
+            //documentType
+            if (!documentType.equals("")) {
+                if(existingDoc.getDocumentType() == null) {
+                    toDelete.add(existingDoc);
+                }
+                else if (!existingDoc.getDocumentType().equals(documentType)) {
+                    toDelete.add(existingDoc);
+                }
+            }
+
+            //language
+            if (!language.equals("")) {
+                if(existingDoc.getLanguage() == null) {
+                    toDelete.add(existingDoc);
+                }
+                else if (!existingDoc.getDocumentType().equals(language)) {
+                    toDelete.add(existingDoc);
+                }
+            }
+
+
+            //recipient
+            if (!recipient.equals("")) {
+                if(existingDoc.getRecipient() == null) {
+                    toDelete.add(existingDoc);
+                }
+                else if (!existingDoc.getRecipient().equals(recipient)) {
+                    toDelete.add(existingDoc);
+                }
+            }
+
+
+            //sender
+            if (!sender.equals("")) {
+                if(existingDoc.getSender() == null) {
+                    toDelete.add(existingDoc);
+                }
+                else if (!existingDoc.getSender().equals(sender)) {
+                    toDelete.add(existingDoc);
+                }
+            }
+
+
+            //physicalLocation
+            if (!physicalLocation.equals("")) {
+                if(existingDoc.getPhysicalLocation() == null) {
+                    toDelete.add(existingDoc);
+                }
+                else if (!existingDoc.getPhysicalLocation().equals(physicalLocation)) {
+                    toDelete.add(existingDoc);
+                }
+            }
+
+
+        }
+        filteredDocsList.removeAll(toDelete);
+        return filteredDocsList;
     }
 }

@@ -13,14 +13,14 @@ export default function Filter () {
     const {token, user} = useAuth()
     const [error, setError] = useState()
     const [filteredDocuments, setFilteredDocuments] = useState([])
-    const [filterParams, setFilterParams] = useState([])
-    const [category, setCategory] = useState()
-    const [date, setDate] = useState()
-    const [documentType, setDocumentType] = useState()
-    const [language, setLanguage] = useState()
-    const [recipient, setRecipient] = useState()
-    const [sender, setSender] = useState()
-    const [physicalLocation, setPhysicalLocation] = useState()
+    const [filterParams, setFilterParams] = useState()
+    const [category, setCategory] = useState("")
+    const [date, setDate] = useState("")
+    const [documentType, setDocumentType] = useState("")
+    const [language, setLanguage] = useState("")
+    const [recipient, setRecipient] = useState("")
+    const [sender, setSender] = useState("")
+    const [physicalLocation, setPhysicalLocation] = useState("")
 
     const handleCategoryChange = event => {
         setCategory(event.target.value)
@@ -45,7 +45,7 @@ export default function Filter () {
     }
 
     useEffect(() => {
-        if(filterParams.length > 0) {
+        if(filterParams) {
             console.log(filterParams)
             getSomeUserDocs(token, filterParams)
                 .then(setFilteredDocuments)
@@ -56,22 +56,21 @@ export default function Filter () {
     }, [filterParams])
 
     const history = useHistory();
-    const handleBack = event => {
+    const handleBack = () => {
         history.push("/browse")
     }
 
     const handleSubmit = event => {
         event.preventDefault()
-        const createdFilterParams = []
-
-        if (category) {createdFilterParams.push({category: category})}
-        if (date) {createdFilterParams.push({date: date})}
-        if (documentType) {createdFilterParams.push({documentType: documentType})}
-        if (language) {createdFilterParams.push({language: language})}
-        if (recipient) {createdFilterParams.push({recipient: recipient})}
-        if (sender) {createdFilterParams.push({sender: sender})}
-        if (physicalLocation) {createdFilterParams.push({physicalLocation: physicalLocation})}
-
+        const createdFilterParams = {
+            category: category,
+            date: date,
+            documentType: documentType,
+            language: language,
+            physicalLocation: physicalLocation,
+            recipient: recipient,
+            sender: sender,
+        }
         setFilterParams(createdFilterParams)
 
     }
