@@ -48,12 +48,14 @@ export default function Login() {
             <LoginForm onSubmit={handleSubmit}>
                 <TextField
                     title = "Username"
+                    type = "text"
                     name = "username"
                     value ={credentials.username}
                     onChange = {handleCredentialsChange}
                 />
                 <TextField
                     title = "Password"
+                    type = "password"
                     name = "password"
                     value ={credentials.password}
                     onChange = {handleCredentialsChange}

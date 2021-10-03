@@ -7,7 +7,7 @@ export default function TextField({
     return(
         <Wrapper>
             {title}
-            <input{...props} title={title}/>
+            <input {...props} type = {props.type} title={title}/>
         </Wrapper>
 
     )

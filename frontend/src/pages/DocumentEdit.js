@@ -1,7 +1,6 @@
 import Page from "../components/Page";
 import Navigation from "../components/Navigation";
 import Loading from "../components/Loading";
-import BackButton from "../components/BackButton";
 import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
 import {Redirect, useHistory, useParams} from "react-router-dom";
@@ -13,7 +12,6 @@ export default function DocumentEdit () {
     const { token, user } = useAuth()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
-    const history = useHistory();
     const documentId = useParams();
     const [currentDocument, setCurrentDocument] = useState(false)
 
@@ -28,10 +26,6 @@ export default function DocumentEdit () {
             .finally(() => setLoading(false))
     }, [user])
 
-    const handleBack = event => {
-        history.push(`/details/${documentId.documentId}`)
-    }
-
     return (
         <Page>
             <Navigation user = {user}/>
@@ -39,7 +33,6 @@ export default function DocumentEdit () {
             {currentDocument && (
                 <Wrapper>
                     <DocumentDetailsForm document = {currentDocument.data} />
-                    <BackButton onClick ={handleBack} >Cancel</BackButton>
                     <img src = {currentDocument.data.url} alt = ""/>
                 </Wrapper>
             )}

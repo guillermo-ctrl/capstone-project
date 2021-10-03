@@ -3,6 +3,7 @@ import {useAuth} from "../auth/AuthProvider";
 import {useEffect, useState} from "react";
 import {updateDocument} from "../services/api-service";
 import {useHistory, useParams} from "react-router-dom";
+import BackButton from "./BackButton";
 
 export function DocumentDetailsForm({...props}) {
     const { token, logout, user } = useAuth()
@@ -72,7 +73,11 @@ export function DocumentDetailsForm({...props}) {
 
         setDocument(modifiedDocument)
     }
-
+    const handleBack = event => {
+        if (document) {
+            history.push(`/details/${document.imageId}`)
+        }
+    }
     return (
         <Wrapper>
 
@@ -115,6 +120,8 @@ export function DocumentDetailsForm({...props}) {
                     <div>
                     <input type = "submit" value = "Save changes"/>
                     </div>
+
+                    <BackButton onClick ={handleBack} >Cancel</BackButton>
 
                 </form>
         </Wrapper>
