@@ -90,12 +90,13 @@ public class DocumentController {
         return new ResponseEntity<>(document, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Delete a document by id")
-    @DeleteMapping(value = "delete/{documentId}")
-    public ResponseEntity<Document> deleteDocumentById(@PathVariable String documentId, @AuthenticationPrincipal UserEntity user) {
-        Document deletedDocument = mapperService.map(documentService.getImageByImageId(documentId, user));
-        documentService.deleteByImageIdAndUserIs(documentId, user);
-        return new ResponseEntity<>(deletedDocument, HttpStatus.OK);
+    @DeleteMapping("delete/{documentId}")
+    public ResponseEntity<Document> deleteDocument (@PathVariable String documentId, @AuthenticationPrincipal UserEntity user){
+        DocumentEntity docEntityToRemove = documentService.getImageByImageId(documentId, user);
+        String documentUrl = docEntityToRemove.getUrl();
+        documentService.deleteDocument(documentUrl, user);
+        DocumentEntity controllercheck = documentService.getImageByImageId(documentId, user);
+        return new ResponseEntity<>(mapperService.map(docEntityToRemove), HttpStatus.OK);
     }
 
 }

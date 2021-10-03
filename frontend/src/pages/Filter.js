@@ -46,7 +46,6 @@ export default function Filter () {
 
     useEffect(() => {
         if(filterParams) {
-            console.log(filterParams)
             getSomeUserDocs(token, filterParams)
                 .then(setFilteredDocuments)
                 .catch(error => {

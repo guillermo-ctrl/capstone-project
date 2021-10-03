@@ -88,6 +88,7 @@ export function DocumentDetailsForm({...props}) {
             })
             history.push(`/browse`)
         }
+        history.push(`/browse`)
     }
 
     return (

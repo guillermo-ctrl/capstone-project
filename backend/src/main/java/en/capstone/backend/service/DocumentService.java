@@ -8,6 +8,7 @@ import en.capstone.backend.repo.DocumentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,7 @@ public class DocumentService {
         return allByUserIs;
     }
 
-    public void deleteByImageIdAndUserIs(String documentId, UserEntity user) {
-        documentRepo.deleteByImageIdAndUserIs(Long.valueOf(documentId), user);
-    }
+
 
     public DocumentEntity getImageByImageId(String imageId, UserEntity user) {
         return documentRepo.findByImageIdAndUserIs(Long.valueOf(imageId), user);
@@ -161,6 +160,11 @@ public class DocumentService {
         return filteredDocsList;
     }
 
-
-
+    @Transactional
+    public DocumentEntity deleteDocument(String documentUrl, UserEntity user) {
+        DocumentEntity entity = documentRepo.findByUrlAndUserIs(documentUrl, user);
+        documentRepo.deleteDocumentEntityByUrl(documentUrl);
+        DocumentEntity check = documentRepo.findByUrlAndUserIs(documentUrl, user);
+        return entity;
+    }
 }

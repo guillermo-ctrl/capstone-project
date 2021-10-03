@@ -1,6 +1,5 @@
 package en.capstone.backend.repo;
 
-import en.capstone.backend.api.User;
 import en.capstone.backend.model.DocumentEntity;
 import en.capstone.backend.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +15,5 @@ public interface DocumentRepo extends JpaRepository<DocumentEntity,Long>, JpaSpe
 
     DocumentEntity findByUrlAndUserIs(String url, UserEntity user);
 
-    DocumentEntity deleteByImageIdAndUserIs(Long imageId, UserEntity user);
-
+    void deleteDocumentEntityByUrl(String documentUrl);
 }

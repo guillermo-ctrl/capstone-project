@@ -40,7 +40,6 @@ export default function DocumentEdit () {
             {currentDocument && (
                 <Wrapper>
                     <DocumentDetailsForm document = {currentDocument.data} />
-                    <BackButton onClick ={handleBack} >Cancel</BackButton>
                     <img src = {currentDocument.data.url} alt = ""/>
                 </Wrapper>
             )}
