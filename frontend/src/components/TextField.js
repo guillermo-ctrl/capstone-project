@@ -20,7 +20,8 @@ const Wrapper = styled.div`
         padding-top: 5px;
         padding-bottom: 5px;
       margin-top: 10px;
-      border-radius: var(--size-s);
+      border: 2px solid #aaa4a4;
+    outline-color: #E66223;
     }
   margin-bottom: 20px;
  

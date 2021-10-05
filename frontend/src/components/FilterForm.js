@@ -10,6 +10,8 @@ export default styled.form`
        padding: 5px;
        float: right;
        clear: both;
+       border: 2px solid #aaa4a4;
+       outline-color: #E66223;
     }
     
     input[type=submit] {

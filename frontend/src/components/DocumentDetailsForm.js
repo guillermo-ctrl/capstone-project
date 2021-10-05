@@ -129,13 +129,18 @@ export function DocumentDetailsForm({...props}) {
 }
 
 const Wrapper = styled.div `
+
     input {
        display: block;
        padding: 5px;
        float: right;
        clear: both;
+       border: 2px solid #aaa4a4;
+    outline-color: #E66223;
+       
     }
     input[type=submit] {
+    
        display: block;
        width: 300px;
        margin: 20px auto;
@@ -144,6 +149,7 @@ const Wrapper = styled.div `
        color: white;
        font-size: 1em;
        background: #15aabf;
+       
     }
     
     div {
@@ -154,6 +160,7 @@ const Wrapper = styled.div `
      flex-wrap: wrap;
      justify-content: left;
      margin-left: 10%;
+     
   
   
   
