@@ -46,9 +46,9 @@ export default function DocumentDetails () {
             {currentDocument && (
                     <div>
                         <DocumentProperties document = {currentDocument.data} />
-                        <SingleDocument document={currentDocument.data}/>
                         <BackButton onClick ={handleEdit} >Edit</BackButton>
                         <BackButton onClick ={handleBack} >Back to documents</BackButton>
+                        <SingleDocument document={currentDocument.data}/>
                     </div>
             )}
 
